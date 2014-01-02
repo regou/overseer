@@ -1,3 +1,4 @@
+![](http://https://raw.github.com/regou/overseer/master/icon.jpg)
 OVERSEER
 ========
 
