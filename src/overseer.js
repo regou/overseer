@@ -1,7 +1,7 @@
 /*
  * overseer.js by regou
  * https://github.com/regou/overseer
- * @license MIT License http://goo.gl/Z8Nlo
+ * @license MIT License
  *
  * A light weight, simple Object.observe shim
  *
