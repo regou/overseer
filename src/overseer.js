@@ -60,6 +60,7 @@
                         get:function(){return this[oseerStr];},
                         set:function(newval){
                             var oldval=this[oseerStr];
+                            if(newval===oldval){return;}
                             this[oseerStr]=newval;
                             if(conf.highPerformance){
                                 requestAnimFrame(function(){
