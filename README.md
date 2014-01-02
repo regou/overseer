@@ -1,4 +1,4 @@
-![](http://https://raw.github.com/regou/overseer/master/icon.jpg)
+<img src="http://https://raw.github.com/regou/overseer/master/icon.jpg" >
 OVERSEER
 ========
 
