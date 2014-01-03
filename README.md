@@ -52,6 +52,13 @@ Try these:
      obj.name;  //output: "regou"
      obj.age;   //output: 45
 
+Watch Array : Watch arr[0]  and  arr[1]
+
+	var arr=["Tom","Jim","Hank"];
+	Overseer.watchAll(arr,[0,1],function(index,newval,oldval,arr){
+        	//Handle Change here
+		 console.log("change ",index," from ",oldval," to ",newval);
+ 	});
 
 You can unwatch it if you want:
 
