@@ -55,7 +55,7 @@ Try these:
 Watch Array : Watch arr[0]  and  arr[1]
 
 	var arr=["Tom","Jim","Hank"];
-	Overseer.watchAll(arr,[0,1],function(index,newval,oldval,arr){
+	Overseer.watch(arr,[0,1],function(index,newval,oldval,arr){
         	//Handle Change here
 		 console.log("change ",index," from ",oldval," to ",newval);
  	});
