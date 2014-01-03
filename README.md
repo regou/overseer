@@ -7,18 +7,18 @@ Overseer.js A light weight, simple Object.observe shim
 
 ### Why overseer.js?
 
-Observe JavaScript Object  in simple way;
+Simple  : Observe JavaScript Object/Array  in simple way;
 
-Small : Only 1.54k after minified!
+Small   : Only 1.54k after minified!
 
-Use it now :
+Use Now :
 
-Not like native Object.observe , Overseer support FF2.0+ Chrome IE8+ Opera9.5+ Safari3+
+Unlike native Object.observe , Overseer support FF2.0+ Chrome1.0+ IE8+ Opera9.5+ Safari3+
 
 
 ### Basic usage
     Overseer.watch(obj,["age"],function(key,newval,oldval,Obj){
-        //Handle Change here:
+        //Handle Change here
     });
 
 
@@ -45,7 +45,7 @@ Watch obj.name and obj.age
      });
 
 
-Try these:
+Then try these:
 
      obj.name="regou";  // output: "change name from wx to regou"
      obj.age="45";  // output: "change age from 24 to 45"
@@ -60,7 +60,7 @@ Watch Array : Watch arr[0]  and  arr[1]
 		 console.log("change ",index," from ",oldval," to ",newval);
  	});
 
-You can unwatch it if you want:
+You can unwatch them if you want:
 
     Overseer.unwatch(obj,["name"]); //unwatch obj.name
     obj.name="pop"; // no console output,just change the value
@@ -72,9 +72,9 @@ You can unwatch it if you want:
 
 Observe one or more properties in this Object(shallow watch).
 
-`Obj` -- The object you want to observe;
+`Obj` -- The Object/Array you want to observe;
 
-`keyArray` - The keynames of the object your want to observe,must be array;
+`keyArray` - The keynames/Index of the Object/Array your want to observe,must be array;
 
 `callback` - Will pass 4 parameters (key,newValue,oldValue,Obj);
 
@@ -84,7 +84,7 @@ Observe one or more properties in this Object(shallow watch).
 
 **Overseer.watchAll(Obj,callback[,highPerformance]);**
 
-Observe all properties in this Object (shallow watch).
+Observe all properties in this Object/Array (shallow watch).
 *****
 
 **Overseer.unwatch(Obj,keyArray);**
@@ -94,5 +94,5 @@ Unwatch.
 
 **Overseer.unwatchAll(Obj);**
 
-Unwatch All all properties in this Object.
+Unwatch All properties(shallow) in this Object/Array.Also this will restore the Obj/Array to original.
 
