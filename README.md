@@ -17,7 +17,7 @@ Unlike native Object.observe , Overseer support FF2.0+ Chrome1.0+ IE8+ Opera9.5+
 
 
 ### Basic usage
-    Overseer.watch(obj,["age"],function(key,newval,oldval,Obj){
+    Overseer.watch(obj,["age"],function(change){
         //Handle Change here
     });
 
@@ -39,9 +39,9 @@ nodejs:
 Watch obj.name and obj.age
 
      var obj={name:"wx",age:"24",gen:"male"};
-     Overseer.watch(obj,["name","age"],function(key,newval,oldval,Obj){
+     Overseer.watch(obj,["name","age"],function(change){
             //Handle Change here
-       console.log("change ",key," from ",oldval," to ",newval);
+       console.log("change ",change.key," from ",change.oldValue," to ",change.newValue);
      });
 
 
@@ -55,9 +55,9 @@ Then try these:
 Watch Array : Watch arr[0]  and  arr[1]
 
 	var arr=["Tom","Jim","Hank"];
-	Overseer.watch(arr,[0,1],function(index,newval,oldval,arr){
+	Overseer.watch(arr,[0,1],function(change){
         	//Handle Change here
-		 console.log("change ",index," from ",oldval," to ",newval);
+		 console.log("change ",change.key," from ",change.oldValue," to ",change.newValue);
  	});
 
 You can unwatch them if you want:
@@ -68,21 +68,23 @@ You can unwatch them if you want:
 
 ### APIs
 *****
-**Overseer.watch(Obj,keyArray,callback[,highPerformance]);**
+**Overseer.watch(Obj,keyArray,callback[,config]);**
 
 Observe one or more properties in this Object(shallow watch).
 
-`Obj` -- The Object/Array you want to observe;
+`Obj` - Object/Array. The Object/Array you want to observe;
 
-`keyArray` - The keynames/Index of the Object/Array your want to observe,must be array;
+`keyArray` - Array. The keynames/Index of the Object/Array your want to observe,must be array;
 
-`callback` - Will pass 4 parameters (key,newValue,oldValue,Obj);
+`callback` - Function. Will pass 1 object with 'key','newValue','oldValue','Obj';
 
-`highPerformance` - If you do something crazy and the value changing in very high frequency,you should set it to true(may reduce callback times).Default is false.
+`config` - Object. Do some config in this optional parameter.
+
+`config.highPerformance` - Boolean. If you do something crazy and the value changing in very high frequency,you should set it to true(may reduce callback times).Default is false.
 *****
 
 
-**Overseer.watchAll(Obj,callback[,highPerformance]);**
+**Overseer.watchAll(Obj,callback[,config]);**
 
 Observe all properties in this Object/Array (shallow watch).
 *****

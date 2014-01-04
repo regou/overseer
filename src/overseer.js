@@ -62,12 +62,17 @@
                             var oldval=this[oseerStr];
                             if(newval===oldval){return;}
                             this[oseerStr]=newval;
+                            var change={
+                                'key':key,'obj':Obj,
+                                'newValue':newval,
+                                'oldValue':oldval
+                            };
                             if(conf.highPerformance){
                                 requestAnimFrame(function(){
-                                    call(key,newval,oldval,Obj);
+                                    call(change);
                                 });
                             }else{
-                                call(key,newval,oldval,Obj);
+                                call(change);
                             }
                         }
                     });
