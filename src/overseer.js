@@ -118,6 +118,12 @@
         Overseer.unwatch(Obj,Object.keys(Obj));
     };
 
+    if('innerHeight' in global){
+        global.Overseer=Overseer;
+    }else{
+        Object.keys(Overseer).forEach(function(k){
+            global[k]=Overseer[k];
+        });
+    }
 
-    global.Overseer=Overseer;
 })(typeof(exports) === "undefined" ? window : exports);
