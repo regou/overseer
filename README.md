@@ -67,6 +67,12 @@ You can unwatch them if you want:
 
 
 ### APIs
+
+*****
+**Overseer.support**
+Boolean. if Browser support Overseer
+*****
+
 *****
 **Overseer.watch(Obj,keyArray,callback[,config]);**
 
