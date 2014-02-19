@@ -43,7 +43,7 @@
 
     var Overseer={
         support:(function(){
-            return ("keys" in Object && Object.defineProperty && Array.isArray);
+            return ("keys" in Object && !!Object.defineProperty && !!Array.isArray);
         }()),
         watch:function(Obj,keys,call,conf){
             var self=Overseer;
