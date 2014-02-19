@@ -7,7 +7,7 @@
  *
  */
 
-(function(global) {
+(function(window, module, define) {
     'use strict';
     var prefix="oseer_";
     var error_keytype="2nd parameter must be a array of keys! eg. ['name','age','gender']";
@@ -121,6 +121,7 @@
         Overseer.unwatch(Obj,Object.keys(Obj));
     };
 
-    global.Overseer=Overseer;
-
-})(typeof(exports) === "undefined" ? window : exports);
+    window.Overseer=Overseer;
+    module.exports=Overseer;
+    define(Overseer);
+})(typeof window !== "undefined" ? window : {}, typeof module !== "undefined" && module.exports? module:{}, typeof define === 'function'?define:function(){} );
