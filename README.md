@@ -31,7 +31,9 @@ Include the `overseer.js` in your project.
 
 nodejs:
 
-	var Overseer=require("./overseer.js").Overseer;
+	npm install overseer
+
+	var Overseer=require("overseer").Overseer;
 
 
 ### Example:
