@@ -12,9 +12,9 @@
     var prefix="oseer_";
     var error_keytype="2nd parameter must be a array of keys! eg. ['name','age','gender']";
     var requestAnimFrame=(function(){
-        return  global.requestAnimationFrame       ||
-            global.webkitRequestAnimationFrame ||
-            global.mozRequestAnimationFrame    ||
+        return  window.requestAnimationFrame       ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame    ||
             function( callback ){
                 setTimeout(callback, 0);
             };
@@ -121,7 +121,11 @@
         Overseer.unwatch(Obj,Object.keys(Obj));
     };
 
-    window.Overseer=Overseer;
-    module.exports=Overseer;
+
+    if(module){
+        module.exports=Overseer;
+    }else{
+        window.Overseer=Overseer;
+    }
     define(Overseer);
-})(typeof window !== "undefined" ? window : {}, typeof module !== "undefined" && module.exports? module:{}, typeof define === 'function'?define:function(){} );
+})(typeof window !== "undefined" ? window : {}, typeof module !== "undefined" && module.exports? module:null, typeof define === 'function'?define:function(){} );
