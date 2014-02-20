@@ -11,14 +11,21 @@
     'use strict';
     var prefix="oseer_";
     var error_keytype="2nd parameter must be a array of keys! eg. ['name','age','gender']";
-    var requestAnimFrame=(function(){
-        return  global.requestAnimationFrame       ||
-            global.webkitRequestAnimationFrame ||
-            global.mozRequestAnimationFrame    ||
-            function( callback ){
-                setTimeout(callback, 0);
+    var debounce = function(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
             };
-    })();
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+
     var clone=function(obj) {
         if (null == obj || "object" != typeof obj){return obj;}
         if (obj instanceof Date) {
@@ -52,10 +59,9 @@
                 throw new Error("Callback function (3rd parameter) not specified or type Error!");
             }
 
-
+            var makeCallback=debounce(call.bind(makeCallback),conf.highPerformance || 100,true);
             var binding=function(Obj,key){
                 if(key in Obj){
-
                     var oseerStr=prefix+key;
                     Obj[oseerStr]=clone(Obj[key]);
                     Object.defineProperty(Obj,oseerStr,{enumerable:false});
@@ -71,9 +77,7 @@
                                 'oldValue':oldval
                             };
                             if(conf.highPerformance){
-                                requestAnimFrame(function(){
-                                    call(change);
-                                });
+                                makeCallback(change);
                             }else{
                                 call(change);
                             }
@@ -90,10 +94,8 @@
             }
 
         },
-        watchAll:function(Obj,call,bol){
-            Overseer.watch(Obj,Object.keys(Obj),call,{
-                highPerformance:bol
-            });
+        watchAll:function(Obj,call,conf){
+            Overseer.watch(Obj,Object.keys(Obj),call,conf);
         }
     };
 

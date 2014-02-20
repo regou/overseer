@@ -6,10 +6,14 @@
 <body>
      <script src="src/overseer.js"></script>
 <script>
-    if(Overseer.support){
-        alert("support");
-    }else{
-        alert("Not support");
+    var wx={name:"wx",age:"24"};
+
+    Overseer.watchAll(wx,function(change){
+        console.log(change);
+    },{highPerformance:2000});
+
+    var run=function(){
+        wx.age++;
     }
 </script>
 </body>
