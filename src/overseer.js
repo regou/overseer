@@ -124,8 +124,10 @@
 
     if(module){
         module.exports=Overseer;
+    }else if(define){
+        define(Overseer);
     }else{
         window.Overseer=Overseer;
     }
-    define(Overseer);
-})(typeof window !== "undefined" ? window : {}, typeof module !== "undefined" && module.exports? module:null, typeof define === 'function'?define:function(){} );
+
+})(typeof window !== "undefined" ? window : {}, typeof module !== "undefined" && module.exports? module:null, typeof define === 'function'?define:null );
