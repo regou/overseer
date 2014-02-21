@@ -12,19 +12,21 @@
     var prefix="oseer_";
     var error_keytype="2nd parameter must be a array of keys! eg. ['name','age','gender']";
     var calmdown = function(func, wait) {
-        var holder=false,timer1=null,timer2=null;
+        var isHold=false,timer1=null,timer2=null;
         return function() {
             var context = this, args = arguments;
-            var needRun = !holder;
+            var needRun = !isHold;
             if (needRun) {
+                isHold=true;
                 func.apply(context, args);
-                clearTimeout(timer1);clearTimeout(timer2);holder=true;
-                timer1=setTimeout(function(){holder=false},wait);
+                clearTimeout(timer1);clearTimeout(timer2);
+                timer1=setTimeout(function(){isHold=false},wait);
             }else{
-                clearTimeout(timer2);holder=true;
+                isHold=true;
+                clearTimeout(timer2);
                 timer2=setTimeout(function(){
                     func.apply(context, args);
-                    holder=false;
+                    isHold=false;
                 },wait);
             }
         };
