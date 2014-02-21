@@ -90,10 +90,8 @@
             }
 
         },
-        watchAll:function(Obj,call,bol){
-            Overseer.watch(Obj,Object.keys(Obj),call,{
-                highPerformance:bol
-            });
+        watchAll:function(Obj,call,conf){
+            Overseer.watch(Obj,Object.keys(Obj),call,conf);
         }
     };
 
