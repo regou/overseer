@@ -1,6 +1,6 @@
 {
   "name": "overseer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Overseer.js A light weight, simple Object.observe shim",
   "main": "./src/overseer.js",
   "scripts": {
