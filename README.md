@@ -33,7 +33,7 @@ nodejs:
 
 	npm install overseer
 
-	var Overseer=require("overseer").Overseer;
+	var Overseer=require("overseer");
 
 
 ### Example:
