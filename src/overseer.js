@@ -11,18 +11,23 @@
     'use strict';
     var prefix="oseer_";
     var error_keytype="2nd parameter must be a array of keys! eg. ['name','age','gender']";
-    var debounce = function(func, wait, immediate) {
-        var timeout;
+    var calmdown = function(func, wait, immediate) {
+        var holder=false,timer=null,timer2=null;;
         return function() {
             var context = this, args = arguments;
-            var later = function() {
-                timeout = null;
-                if (!immediate) func.apply(context, args);
-            };
-            var callNow = immediate && !timeout;
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-            if (callNow) func.apply(context, args);
+            var needRun = !holder;
+            if (needRun) {
+                func.apply(context, args);
+                clearTimeout(timer);
+                holder=true;
+                timer=setTimeout(function(){holder=false},wait);
+            }else{
+                clearTimeout(timer2);holder=true;
+                timer2=setTimeout(function(){
+                    func.apply(context, args);
+                    holder=false;
+                },wait);
+            }
         };
     };
 
@@ -59,7 +64,7 @@
                 throw new Error("Callback function (3rd parameter) not specified or type Error!");
             }
 
-            var makeCallback=debounce(call.bind(makeCallback),conf.highPerformance || 100,true);
+            var makeCallback=calmdown(call.bind(makeCallback),conf.highPerformance || 100,true);
             var binding=function(Obj,key){
                 if(key in Obj){
                     var oseerStr=prefix+key;
