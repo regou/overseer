@@ -119,6 +119,22 @@
         Overseer.unwatch(Obj,Object.keys(Obj));
     };
 
+    var timout = window.setImmediate || window.msSetImmediate || setTimeout;
+
+    var dirty_check = function(Obj,key,call){
+        var check = function(){
+            return Obj.hasOwnProperty(key);
+        };
+        var loop = function(){
+            if(check()){
+                call(Obj[key]);
+            }else{
+                timout(loop,50);
+            }
+        };
+        loop();
+    };
+    Overseer.dirty_check = dirty_check;
 
     if(module){
         module.exports=Overseer;
